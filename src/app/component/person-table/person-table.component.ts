@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { faEdit, faTrash } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
   selector: 'app-person-table',
@@ -6,7 +7,8 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./person-table.component.css']
 })
 export class PersonTableComponent implements OnInit {
-
+  faTrash = faTrash;
+  faEdit = faEdit;
   constructor() { }
 
   ngOnInit(): void {
