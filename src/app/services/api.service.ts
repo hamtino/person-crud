@@ -1,9 +1,18 @@
 import { Injectable } from '@angular/core';
+import { HttpClient, HttpClientModule } from '@angular/common/http';
+import { Observable } from 'rxjs';
+import { person } from './person';
+
 
 @Injectable({
   providedIn: 'root'
 })
 export class APIService {
+  API: string="http://localhost:3000/personas"
 
-  constructor() { }
+  constructor(private clientHttp:HttpClient){}
+
+  sendPerson(dataPerson:person):Observable<any> {
+      return this.clientHttp.post(this.API,dataPerson);
+  }
 }

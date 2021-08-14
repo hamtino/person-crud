@@ -3,6 +3,7 @@ import Swal from 'sweetalert2/dist/sweetalert2.js';
 
 import { faSave, faWindowClose } from '@fortawesome/free-solid-svg-icons';
 import { FormGroup, FormBuilder } from '@angular/forms';
+import { APIService } from './services/api.service';
 
 @Component({
   selector: 'app-root',
@@ -16,7 +17,7 @@ export class AppComponent {
   
   formPerson:FormGroup;
 
-  constructor(public form:FormBuilder) {
+  constructor(public form:FormBuilder, private APIservice:APIService) {
     this.formPerson=this.form.group({
       fullname:[''],
       birth:['']
@@ -25,6 +26,7 @@ export class AppComponent {
   sendData():any{
     console.log("bonita");
     console.log(this.formPerson.value);
+    this.APIservice.sendPerson(this.formPerson.value).subscribe();
   }
   simpleAlert(){
     Swal.fire('Hello world!');
