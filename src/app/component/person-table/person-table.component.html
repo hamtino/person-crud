@@ -14,40 +14,17 @@
         </tr>
       </thead>
       <tbody>
-        <tr>
-          <th scope="row">1</th>
-          <td>Mark</td>
-          <td>Otto</td>
-          <td>@mdo</td>
+        <tr *ngFor="let person of Persons; let iControl=index">
+          <td>{{person.id}}</td>
+          <td>{{person.fullname}}</td>
+          <td>{{person.birth}}</td>
+          <td>{{person.createdAt}}</td>
           <td>
             <div class="btn-group" role="group" aria-label="Basic example">
               <button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#modaleditar"><fa-icon [icon]="faEdit"></fa-icon></button>
-              <button type="button" class="btn btn-warning"><fa-icon [icon]="faTrash"></fa-icon></button>
+              <button type="button" class="btn btn-warning" (click)="trashPerson(person.id)"><fa-icon [icon]="faTrash"></fa-icon></button>
             </div>
           </td>
-        </tr>
-        <tr>
-          <th scope="row">2</th>
-          <td>Jacob</td>
-          <td>Thornton</td>
-          <td>@fat</td>
-          <td>
-              <div class="btn-group" role="group" aria-label="Basic example">
-                <button type="button" class="btn btn-success"><fa-icon [icon]="faEdit"></fa-icon></button>
-                <button type="button" class="btn btn-warning"><fa-icon [icon]="faTrash"></fa-icon></button>
-              </div>
-            </td>
-        </tr>
-        <tr>
-          <th scope="row">3</th>
-          <td colspan="2">Larry the Bird</td>
-          <td>@twitter</td>
-          <td>
-              <div class="btn-group" role="group" aria-label="Basic example">
-                <button type="button" class="btn btn-success"><fa-icon [icon]="faEdit"></fa-icon></button>
-                <button type="button" class="btn btn-warning"><fa-icon [icon]="faTrash"></fa-icon></button>
-              </div>
-            </td>
         </tr>
       </tbody>
     </table>

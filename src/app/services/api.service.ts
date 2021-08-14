@@ -18,7 +18,11 @@ export class APIService {
       return this.clientHttp.post(this.API,dataPerson);
   }
 
-  getPerson(){
+  getPersons(){
     return this.clientHttp.get(this.API)
   }
+
+  trashPerson(id:any):Observable<any> {
+    return this.clientHttp.delete(this.API + "/" + id);
+}
 }

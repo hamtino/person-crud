@@ -4,6 +4,7 @@ import Swal from 'sweetalert2/dist/sweetalert2.js';
 import { faSave, faWindowClose } from '@fortawesome/free-solid-svg-icons';
 import { FormGroup, FormBuilder } from '@angular/forms';
 import { APIService } from './services/api.service';
+import { PersonTableComponent } from './component/person-table/person-table.component';
 
 @Component({
   selector: 'app-root',
