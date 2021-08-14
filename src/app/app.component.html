@@ -12,7 +12,7 @@
   Registrar persona
 </button>
 
-<!-- Modal -->
+<!-- Modal Crear persona-->
 <div class="modal fade" id="modelId" tabindex="-1" role="dialog" aria-labelledby="modelTitleId" aria-hidden="true">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
@@ -40,3 +40,30 @@
     </div>
 </div>
 
+<!-- Modal Editar persona-->
+<div class="modal fade" id="modaleditar" tabindex="-1" role="dialog" aria-labelledby="modelTitleId" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+      <div class="modal-content">
+          <div class="modal-header">
+              <h5 class="modal-title">Editar persona</h5>
+                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+              <form>
+                  <div class="row">
+                    <div class="col">
+                      <input type="text" class="form-control" placeholder="First name">
+                    </div>
+                    <div class="col-md-5">
+                      <input type="date" class="form-control" placeholder="Last name">
+                    </div>
+                  </div>
+                </form>
+          </div>
+          <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal"><fa-icon [icon]="iconsave"></fa-icon> Cerrar</button>
+              <button type="button" class="btn btn-primary"><fa-icon [icon]="iconsave"></fa-icon> Registrar</button>
+          </div>
+      </div>
+  </div>
+</div>
