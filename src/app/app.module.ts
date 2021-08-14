@@ -6,6 +6,14 @@ import { PersonTableComponent } from './component/person-table/person-table.comp
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { SweetAlert2Module } from '@sweetalert2/ngx-sweetalert2';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { HttpClientModule } from '@angular/common/http';
+
+
+export class ServiceNameService {
+  constructor(private httpClient: HttpClient) { }
+  
+}}
 
 @NgModule({
   declarations: [
@@ -16,7 +24,10 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
     BrowserModule,
     FontAwesomeModule,
     SweetAlert2Module,
-    NgbModule 
+    NgbModule,
+    FormsModule,
+    ReactiveFormsModule,
+    HttpClientModule 
   ],
   providers: [],
   bootstrap: [AppComponent]
