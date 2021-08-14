@@ -1,5 +1,7 @@
 import { Component } from '@angular/core';
 import Swal from 'sweetalert2/dist/sweetalert2.js';
+import {NgbModal, ModalDismissReasons} from '@ng-bootstrap/ng-bootstrap';
+import { faSave, faWindowClose } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
   selector: 'app-root',
@@ -8,6 +10,9 @@ import Swal from 'sweetalert2/dist/sweetalert2.js';
 })
 export class AppComponent {
   title = 'person-crud';
+  iconsave = faSave
+  iconclose = faWindowClose
+  
   simpleAlert(){
     Swal.fire('Hello world!');
   }

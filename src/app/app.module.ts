@@ -5,6 +5,7 @@ import { AppComponent } from './app.component';
 import { PersonTableComponent } from './component/person-table/person-table.component';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { SweetAlert2Module } from '@sweetalert2/ngx-sweetalert2';
+import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 
 @NgModule({
   declarations: [
@@ -14,7 +15,8 @@ import { SweetAlert2Module } from '@sweetalert2/ngx-sweetalert2';
   imports: [
     BrowserModule,
     FontAwesomeModule,
-    SweetAlert2Module 
+    SweetAlert2Module,
+    NgbModule 
   ],
   providers: [],
   bootstrap: [AppComponent]
