@@ -26,7 +26,9 @@ export class AppComponent {
   sendData():any{
     console.log("bonita");
     console.log(this.formPerson.value);
-    this.APIservice.sendPerson(this.formPerson.value).subscribe();
+    this.APIservice.sendPerson(this.formPerson.value).subscribe(resp=>{
+      console.log(resp);
+    });
   }
   simpleAlert(){
     Swal.fire('Hello world!');
