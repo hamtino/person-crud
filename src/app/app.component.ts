@@ -1,7 +1,8 @@
 import { Component } from '@angular/core';
 import Swal from 'sweetalert2/dist/sweetalert2.js';
-import {NgbModal, ModalDismissReasons} from '@ng-bootstrap/ng-bootstrap';
+
 import { faSave, faWindowClose } from '@fortawesome/free-solid-svg-icons';
+import { FormGroup, FormBuilder } from '@angular/forms';
 
 @Component({
   selector: 'app-root',
@@ -13,6 +14,18 @@ export class AppComponent {
   iconsave = faSave
   iconclose = faWindowClose
   
+  formPerson:FormGroup;
+
+  constructor(public form:FormBuilder) {
+    this.formPerson=this.form.group({
+      fullname:[''],
+      birth:['']
+    })
+  }
+  sendData():any{
+    console.log("bonita");
+    console.log(this.formPerson.value);
+  }
   simpleAlert(){
     Swal.fire('Hello world!');
   }
