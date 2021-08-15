@@ -10,19 +10,23 @@ import { person } from './person';
 export class APIService {
 
   // API nodejs y postgresql
-  API: string="http://localhost:3000/personas"
+  API: string = "http://localhost:3000/personas"
 
-  constructor(private clientHttp:HttpClient){}
+  constructor(private clientHttp: HttpClient) { }
 
-  sendPerson(dataPerson:person):Observable<any> {
-      return this.clientHttp.post(this.API,dataPerson);
+  sendPerson(dataPerson: person): Observable<any> {
+    return this.clientHttp.post(this.API, dataPerson);
   }
 
-  getPersons(){
+  updatePerson(id:any, dataPerson: person): Observable<any> {
+    return this.clientHttp.put(this.API + "/" + id, dataPerson);
+  }
+
+  getPersons() {
     return this.clientHttp.get(this.API)
   }
 
-  trashPerson(id:any):Observable<any> {
+  trashPerson(id: any): Observable<any> {
     return this.clientHttp.delete(this.API + "/" + id);
-}
+  }
 }

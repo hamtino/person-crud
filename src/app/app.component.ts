@@ -1,10 +1,4 @@
 import { Component } from '@angular/core';
-import Swal from 'sweetalert2/dist/sweetalert2.js';
-
-import { faSave, faWindowClose } from '@fortawesome/free-solid-svg-icons';
-import { FormGroup, FormBuilder } from '@angular/forms';
-import { APIService } from './services/api.service';
-import { PersonTableComponent } from './component/person-table/person-table.component';
 
 @Component({
   selector: 'app-root',
@@ -13,54 +7,5 @@ import { PersonTableComponent } from './component/person-table/person-table.comp
 })
 export class AppComponent {
   title = 'person-crud';
-  iconsave = faSave
-  iconclose = faWindowClose
   
-  formPerson:FormGroup;
-
-  constructor(public form:FormBuilder, private APIservice:APIService) {
-    this.formPerson=this.form.group({
-      fullname:[''],
-      birth:['']
-    })
-  }
-  sendData():any{
-    console.log("bonita");
-    console.log(this.formPerson.value);
-    this.APIservice.sendPerson(this.formPerson.value).subscribe(resp=>{
-      console.log(resp);
-    });
-  }
-  simpleAlert(){
-    Swal.fire('Hello world!');
-  }
-   
-  alertWithSuccess(){
-    Swal.fire('Thank you...', 'You submitted succesfully!', 'success')
-  }
-   
-  confirmBox(){
-    Swal.fire({
-      title: 'Are you sure want to remove?',
-      text: 'You will not be able to recover this file!',
-      icon: 'warning',
-      showCancelButton: true,
-      confirmButtonText: 'Yes, delete it!',
-      cancelButtonText: 'No, keep it'
-    }).then((result) => {
-      if (result.value) {
-        Swal.fire(
-          'Deleted!',
-          'Your imaginary file has been deleted.',
-          'success'
-        )
-      } else if (result.dismiss === Swal.DismissReason.cancel) {
-        Swal.fire(
-          'Cancelled',
-          'Your imaginary file is safe :)',
-          'error'
-        )
-      }
-    })
-  }
 }

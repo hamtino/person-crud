@@ -17,16 +17,105 @@
         <tr *ngFor="let person of Persons; let iControl=index">
           <td>{{person.id}}</td>
           <td>{{person.fullname}}</td>
-          <td>{{person.birth}}</td>
-          <td>{{person.createdAt}}</td>
+          <td>{{person.birth | date: 'dd-MM-YYYY' :'+0000' }}</td>
+          <td>{{person.createdAt | date: 'dd-MM-YYYY hh:m:s aaa' :'-05:00'}}</td>
           <td>
             <div class="btn-group" role="group" aria-label="Basic example">
-              <button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#modaleditar"><fa-icon [icon]="faEdit"></fa-icon></button>
-              <button type="button" class="btn btn-warning" (click)="trashPerson(person.id)"><fa-icon [icon]="faTrash"></fa-icon></button>
+              <button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#modaleditar"
+                (click)="editPerson(person)">
+                <fa-icon [icon]="faEdit"></fa-icon>
+              </button>
+              <button type="button" class="btn btn-warning" (click)="trashPerson(person.id)">
+                <fa-icon [icon]="faTrash"></fa-icon>
+              </button>
             </div>
           </td>
         </tr>
       </tbody>
     </table>
+  </div>
+</div>
+
+
+
+<!-- Button trigger modal -->
+<button type="button" class="btn btn-primary btn-lg" data-bs-toggle="modal" data-bs-target="#modelId">
+  Registrar persona
+</button>
+
+<!-- Modal Crear persona-->
+<div class="modal fade" id="modelId" tabindex="-1" role="dialog" aria-labelledby="modelTitleId" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Registro de persona</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+
+
+        <form [formGroup]="formPerson" (ngSubmit)="sendData()">
+          <div class="row">
+            <div class="col">
+              <label class="label">Nombre Completo</label>
+              <input type="text" class="input" formControlName="fullname" placeholder="Nombre completo">
+            </div>
+            <div class="col-md-5">
+              <input type="date" class="form-control" formControlName="birth" placeholder="Last name" required>
+            </div>
+          </div>
+          <br>
+          <div class="row">
+            <div class="col">
+              <div class="btn-group" role="group" aria-label="Basic example">
+                <button type="submit" class="btn btn-success" [disabled]="formPerson.invalid">
+                  <fa-icon [icon]="iconsave"></fa-icon> Registrar
+                </button>
+                <button type="button" class="btn btn-warning">
+                  <fa-icon [icon]="iconclose"></fa-icon> Cerrar
+                </button>
+              </div>
+            </div>
+          </div>
+        </form>
+
+
+
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Modal Editar persona-->
+<div class="modal fade" id="modaleditar" tabindex="-1" role="dialog" aria-labelledby="modelTitleId" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Editar persona</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+
+
+        <form [formGroup]="formEdit" (ngSubmit)="updateData()">
+          <div class="row">
+            <div class="col">
+              <input type="text" class="form-control" placeholder="First name" formControlName="fullname">
+            </div>
+            <div class="col-md-5">
+              <input type="date" class="form-control" placeholder="Last name" formControlName="birth">
+            </div>
+          </div>
+          <button type="submit" class="btn btn-primary">
+            <fa-icon [icon]="iconsave"></fa-icon> Registrar
+          </button>
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+            <fa-icon [icon]="iconsave"></fa-icon> Cerrar
+          </button>
+          
+
+        </form>
+      </div>
+    </div>
   </div>
 </div>
