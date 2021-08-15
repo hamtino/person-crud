@@ -78,11 +78,11 @@ export class PersonTableComponent implements OnInit {
   constructor(private DatePipe: DatePipe, public form:FormBuilder, public formEditP:FormBuilder, private APIservice:APIService) {
     this.formEdit=this.form.group({
       fullname:['', Validators.required],
-      birth:['']
+      birth:['', Validators.required]
     });
     this.formPerson=this.form.group({
-      fullname:[''],
-      birth:['']
+      fullname:['', Validators.required],
+      birth:['', Validators.required]
     });
   }
   sendData():any{
@@ -90,6 +90,7 @@ export class PersonTableComponent implements OnInit {
     this.APIservice.sendPerson(this.formPerson.value).subscribe(resp=>{
       console.log(resp);
       this.dataTable();
+      
     });
   }
 

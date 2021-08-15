@@ -53,30 +53,28 @@
       </div>
       <div class="modal-body">
 
-
-        <form [formGroup]="formPerson" (ngSubmit)="sendData()">
+        <form id="contactForm" [formGroup]="formPerson" (ngSubmit)="sendData()">
           <div class="row">
-            <div class="col">
-              <label class="label">Nombre Completo</label>
-              <input type="text" class="input" formControlName="fullname" placeholder="Nombre completo">
-            </div>
-            <div class="col-md-5">
-              <input type="date" class="form-control" formControlName="birth" placeholder="Last name" required>
-            </div>
+
+            <mat-form-field class="col">
+
+              <input matInput placeholder="Nombre Completo" class="form-control" name="fullname"
+                formControlName="fullname">
+
+            </mat-form-field>
+            <mat-form-field appearance="fill">
+              <mat-label>Seleccione fecha de nacimiento</mat-label>
+              <input matInput [matDatepicker]="picker" formControlName="birth">
+              <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+              <mat-datepicker #picker></mat-datepicker>
+            </mat-form-field>
+
+
           </div>
           <br>
-          <div class="row">
-            <div class="col">
-              <div class="btn-group" role="group" aria-label="Basic example">
-                <button type="submit" class="btn btn-success" [disabled]="formPerson.invalid">
-                  <fa-icon [icon]="iconsave"></fa-icon> Registrar
-                </button>
-                <button type="button" class="btn btn-warning">
-                  <fa-icon [icon]="iconclose"></fa-icon> Cerrar
-                </button>
-              </div>
-            </div>
-          </div>
+          <button id="btnSubmit" mat-raised-button type="submit" color="primary"
+            [disabled]="formPerson.invalid">Registrar</button>
+         
         </form>
 
 
@@ -112,7 +110,7 @@
           <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
             <fa-icon [icon]="iconsave"></fa-icon> Cerrar
           </button>
-          
+
 
         </form>
       </div>
