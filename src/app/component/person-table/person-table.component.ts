@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, AfterViewInit,  ViewChild} from '@angular/core';
 import { faEdit, faTrash } from '@fortawesome/free-solid-svg-icons';
 import { APIService } from 'src/app/services/api.service';
 import Swal from 'sweetalert2/dist/sweetalert2.js';
@@ -6,7 +6,9 @@ import { DatePipe } from '@angular/common';
 
 import { faSave, faWindowClose } from '@fortawesome/free-solid-svg-icons';
 import { FormGroup, FormBuilder, Validators, FormControl } from '@angular/forms';
-
+import {MatSort} from '@angular/material/sort';
+import {MatPaginator} from '@angular/material/paginator';
+import {MatTableDataSource} from '@angular/material/table';
 
 @Component({
   selector: 'app-person-table',
@@ -14,7 +16,12 @@ import { FormGroup, FormBuilder, Validators, FormControl } from '@angular/forms'
   styleUrls: ['./person-table.component.css'],
   providers: [DatePipe]
 })
-export class PersonTableComponent implements OnInit {
+export class PersonTableComponent implements AfterViewInit {
+  
+
+  displayedColumns: string[] = ['id', 'fullname', 'birth', 'datereg', 'option'];
+  public dataSource: MatTableDataSource<UserData>;
+
   faTrash = faTrash;
   faEdit = faEdit;
   id = ''
@@ -24,8 +31,10 @@ export class PersonTableComponent implements OnInit {
 
   dataTable(){
     this.APIservice.getPersons().subscribe(res=>{
-      console.log(res);
-      this.Persons=res;
+      this.dataArray  = res;
+      this.dataSource = new MatTableDataSource<UserData>(this.dataArray);
+      this.dataSource.paginator = this.paginator;
+      this.dataSource.sort = this.sort;
     })
   }
 
@@ -64,9 +73,12 @@ export class PersonTableComponent implements OnInit {
       birth:this.DatePipe.transform(person['birth'], 'yyyy-MM-dd', '+0500' )
     })
   }
-
-  ngOnInit(): void {
-    this.dataTable();
+  
+  @ViewChild(MatPaginator) paginator: MatPaginator;
+  @ViewChild(MatSort) sort: MatSort;
+  private dataArray: any;
+  ngAfterViewInit() {
+    this.dataTable()
   }
 
   iconsave = faSave
@@ -90,7 +102,7 @@ export class PersonTableComponent implements OnInit {
     this.APIservice.sendPerson(this.formPerson.value).subscribe(resp=>{
       console.log(resp);
       this.dataTable();
-      
+      this.formPerson.reset;
     });
   }
 
@@ -102,4 +114,19 @@ export class PersonTableComponent implements OnInit {
     });
   }
 
+  applyFilter(event: Event) {
+    const filterValue = (event.target as HTMLInputElement).value;
+    this.dataSource.filter = filterValue.trim().toLowerCase();
+
+    if (this.dataSource.paginator) {
+      this.dataSource.paginator.firstPage();
+    }
+  }
+
+}
+
+export interface UserData {
+  id: string;
+  fullname: string;
+  bith: string;
 }
