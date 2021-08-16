@@ -1,5 +1,6 @@
+<button mat-raised-button color="primary"data-bs-toggle="modal" data-bs-target="#modelId">Registrar persona</button>&nbsp;&nbsp;&nbsp;
 <mat-form-field appearance="standard">
-  <mat-label>Filter</mat-label>
+  <mat-label>Filtro</mat-label>
   <input matInput (keyup)="applyFilter($event)" placeholder="ejemplo Juan" #input>
 </mat-form-field>
 
@@ -31,18 +32,17 @@
       <td mat-cell *matCellDef="let row"> {{row.createdAt | date: 'dd-MM-YYYY hh:m:s aaa' :'-05:00'}} </td>
     </ng-container>
 
-     <!-- Fruit Column -->
-     <ng-container matColumnDef="option">
+    <!-- Fruit Column -->
+    <ng-container matColumnDef="option">
       <th mat-header-cell *matHeaderCellDef mat-sort-header> Opciones</th>
-      <td mat-cell *matCellDef="let row"> 
-          <button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#modaleditar"
-      >
-      
-    </button>
-    <button type="button" class="btn btn-warning" >
-      
-    </button>
-   </td>
+      <td mat-cell *matCellDef="let row">
+        <button mat-mini-fab color="primary" (click)="editPerson(row)" data-bs-toggle="modal" data-bs-target="#modaleditar">
+          <fa-icon [icon]="faEdit"></fa-icon>
+        </button>&nbsp;
+        <button mat-mini-fab color="warn" (click)="trashPerson(row.id)">
+          <fa-icon [icon]="faTrash"></fa-icon>
+        </button>
+      </td>
     </ng-container>
 
 
@@ -54,22 +54,10 @@
       <td class="mat-cell" colspan="4">No se encontro coincidencia "{{input.value}}"</td>
     </tr>
   </table>
-
-  <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]" aria-label="Select page of users"></mat-paginator>
+  
+  <mat-paginator [pageSizeOptions]="[10, 5, 25, 100]" aria-label="Sel"></mat-paginator>
 </div>
 
-
-
-
-
-
-
-
-
-<!-- Button trigger modal -->
-<button type="button" class="btn btn-primary btn-lg" data-bs-toggle="modal" data-bs-target="#modelId">
-  Registrar persona
-</button>
 
 <!-- Modal Crear persona-->
 <div class="modal fade" id="modelId" tabindex="-1" role="dialog" aria-labelledby="modelTitleId" aria-hidden="true">
@@ -86,9 +74,8 @@
 
             <mat-form-field class="col">
 
-              <input matInput placeholder="Nombre Completo" class="form-control" name="fullname"
-                formControlName="fullname">
-
+              <input matInput placeholder="Nombre Completo" class="form-control" name="fullname" formControlName="fullname">
+              
             </mat-form-field>
             <mat-form-field appearance="fill">
               <mat-label>Seleccione fecha de nacimiento</mat-label>
@@ -102,7 +89,7 @@
           <br>
           <button id="btnSubmit" mat-raised-button type="submit" color="primary"
             [disabled]="formPerson.invalid">Registrar</button>
-         
+
         </form>
 
 

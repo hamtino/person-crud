@@ -27,8 +27,10 @@
     "@ng-bootstrap/ng-bootstrap": "^10.0.0",
     "@sweetalert2/ngx-sweetalert2": "^10.0.0",
     "bootstrap": "^5.1.0",
+    "jquery": "^3.6.0",
     "popper": "^1.0.1",
     "rxjs": "~6.6.0",
+    "rxjs-compat": "^6.6.7",
     "sweetalert2": "^11.1.2",
     "tslib": "^2.3.0",
     "zone.js": "~0.11.4"

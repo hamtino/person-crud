@@ -3,7 +3,6 @@ import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { person } from './person';
 
-
 @Injectable({
   providedIn: 'root'
 })
@@ -29,4 +28,6 @@ export class APIService {
   trashPerson(id: any): Observable<any> {
     return this.clientHttp.delete(this.API + "/" + id);
   }
+
+
 }

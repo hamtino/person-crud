@@ -5,10 +5,14 @@ import Swal from 'sweetalert2/dist/sweetalert2.js';
 import { DatePipe } from '@angular/common';
 
 import { faSave, faWindowClose } from '@fortawesome/free-solid-svg-icons';
-import { FormGroup, FormBuilder, Validators, FormControl } from '@angular/forms';
+import { FormGroup, FormBuilder, Validators, FormControl, AsyncValidatorFn, AbstractControl } from '@angular/forms';
 import {MatSort} from '@angular/material/sort';
 import {MatPaginator} from '@angular/material/paginator';
 import {MatTableDataSource} from '@angular/material/table';
+
+import { HttpClient, HttpClientModule } from '@angular/common/http';
+declare var jQuery:any;
+declare var $:any;
 
 @Component({
   selector: 'app-person-table',
@@ -87,24 +91,19 @@ export class PersonTableComponent implements AfterViewInit {
   formPerson:FormGroup;
   formEdit:FormGroup;
 
-  constructor(private DatePipe: DatePipe, public form:FormBuilder, public formEditP:FormBuilder, private APIservice:APIService) {
+  constructor(private http: HttpClient, private DatePipe: DatePipe, public form:FormBuilder, public formEditP:FormBuilder, private APIservice:APIService) {
     this.formEdit=this.form.group({
-      fullname:['', Validators.required],
-      birth:['', Validators.required]
+      fullname:[null, Validators.required],
+      birth:[null, Validators.required]
     });
     this.formPerson=this.form.group({
-      fullname:['', Validators.required],
-      birth:['', Validators.required]
+      fullname:[null, Validators.required        
+      ],
+      birth:[null, Validators.required]
     });
   }
-  sendData():any{
-    console.log(this.formPerson.value);
-    this.APIservice.sendPerson(this.formPerson.value).subscribe(resp=>{
-      console.log(resp);
-      this.dataTable();
-      this.formPerson.reset;
-    });
-  }
+
+  
 
   updateData():any{
     console.log(this.formEdit.value);
@@ -122,8 +121,20 @@ export class PersonTableComponent implements AfterViewInit {
       this.dataSource.paginator.firstPage();
     }
   }
+  sendData(){
+    console.log(this.formPerson.value);
+    this.APIservice.sendPerson(this.formPerson.value).subscribe(resp=>{
+      console.log(resp);
+      this.dataTable();
+      this.formPerson.reset;
+      
+    });
+   
+    $('#modelId').modal('hide');
+  }
 
 }
+
 
 export interface UserData {
   id: string;
